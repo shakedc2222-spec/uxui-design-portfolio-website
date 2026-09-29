@@ -1,0 +1,1488 @@
+/* ==========================================================================
+   Shaked Cohen — Portfolio homepage recreation
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+:root {
+  --ink: #2b2b2e;
+  --ink-soft: #4a4a4f;
+  --muted: #6f6f76;
+  --pill-bg: #eeeef1;
+  --card-bg: rgba(255, 255, 255, 0.15);
+  --card-border: rgba(255, 255, 255, 0.2);
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+  --glass-blur: blur(20px);
+  --glass-shadow: 0 6px 24px 0 rgba(0, 0, 0, 0.08);
+  --btn-bg: #ffffff;
+  --wave-teal: #4fb8b3;
+  --link: #2b2b2e;
+  --page-font: 'Rubik', 'Segoe UI', Helvetica, Arial, sans-serif;
+  --display-font: 'Rubik', 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reference glassmorphism utility — the single source of truth for the
+   translucent-glass surface used across nav, buttons and cards. */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
+}
+
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--page-font);
+  font-weight: 400;
+  color: var(--ink);
+  background: #f4f1ee;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--display-font);
+  font-weight: 700;
+}
+
+p, span, li, a {
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+/* ==========================================================================
+   Background wash — the whole page drifts from blush pink at the top,
+   through cream in the middle, to soft aqua at the bottom.
+   ========================================================================== */
+
+.page-wash {
+  padding-top: 100px;
+  background-image: url('./assets/background-website-opt.png'), linear-gradient(
+    180deg,
+    #f7dede 0%,
+    #f5e2df 8%,
+    #f3e6dd 16%,
+    #f1ecdc 26%,
+    #ecefda 34%,
+    #e7f0dd 42%,
+    #dcf0e2 52%,
+    #d3eee7 60%,
+    #cdece9 68%,
+    #cbe9ea 76%,
+    #cfe6ea 84%,
+    #d9e4ec 92%,
+    #e3e2ee 100%
+  );
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, cover;
+  background-position: top center, top center;
+  background-attachment: fixed, scroll;
+}
+
+.highlight-bar {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ==========================================================================
+   Nav
+   ========================================================================== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 60px 20px;
+  background: rgba(244, 241, 238, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  order: 2;
+}
+
+.nav-links a {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--link);
+  letter-spacing: 0.2px;
+}
+
+.nav-links a:hover {
+  opacity: 0.65;
+}
+
+.nav-links li:nth-child(5) a,
+.nav-links li:nth-child(6) a {
+  font-weight: 600;
+}
+
+.nav-logo {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+  order: 1;
+}
+
+.nav-logo:hover {
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  padding: 40px 60px 0;
+  text-align: center;
+}
+
+.hero-photo-wrap {
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  transform: translateX(-50%);
+  width: 340px;
+  height: auto;
+  z-index: 1;
+}
+
+.hero-photo-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+  margin-top: 210px;
+  padding: 28px 34px 40px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 24px;
+}
+
+.hero-text h1 {
+  font-family: var(--display-font);
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+
+.hero-text .hero-name {
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+
+.hero-text .hero-name strong {
+  font-weight: 700;
+}
+
+.hero-text .hero-tagline {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.hero-divider {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  margin-top: 40px;
+}
+
+/* ==========================================================================
+   Projects
+   ========================================================================== */
+
+.projects {
+  padding: 100px 60px 60px;
+  text-align: left;
+}
+
+.projects h2 {
+  font-family: var(--display-font);
+  font-size: 56px;
+  font-weight: 700;
+  margin-bottom: 100px;
+}
+
+.project-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 1150px;
+  margin: 0 auto 110px;
+  min-height: 380px;
+}
+
+.project-row:last-of-type {
+  margin-bottom: 40px;
+}
+
+.project-row.reverse {
+  flex-direction: row-reverse;
+}
+
+.project-device {
+  position: relative;
+  z-index: 1;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+}
+
+.project-device img {
+  width: 100%;
+  max-width: 320px;
+  filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.14));
+}
+
+.project-device.small img {
+  max-width: 300px;
+}
+
+.project-card {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
+  padding: 44px 46px;
+  text-align: left;
+  margin-left: -100px;
+}
+
+.project-row.reverse .project-card {
+  margin-left: 0;
+  margin-right: -40px;
+  text-align: left;
+}
+
+.project-card h3 {
+  font-family: var(--display-font);
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.project-card p {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin-bottom: 22px;
+  max-width: 480px;
+}
+
+.tag-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.tag-pills {
+  gap: 12px;
+}
+
+.tag-pills span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f8f8;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #757575;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease;
+}
+
+.tag-pills span:hover {
+  box-shadow: 3px 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.case-study-btn {
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  padding: 14px 30px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--glass-shadow);
+  display: inline-block;
+}
+
+/* ==========================================================================
+   Who Am I
+   ========================================================================== */
+
+.who-am-i {
+  text-align: left;
+  padding: 40px 60px 120px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.who-am-i-glass {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
+  padding: 36px 40px;
+}
+
+.who-am-i h2 {
+  font-family: var(--display-font);
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 36px;
+}
+
+.who-am-i p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+}
+
+.who-am-i .more-btn {
+  margin-top: 30px;
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  padding: 13px 32px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--glass-shadow);
+  display: inline-block;
+}
+
+/* ==========================================================================
+   Contact
+   ========================================================================== */
+
+.contact {
+  padding: 40px 60px 160px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.contact p {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 26px;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  width: fit-content;
+}
+
+.contact-links .icon-badge {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   Contact page
+   ========================================================================== */
+
+.contact-page-header {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 70px 60px 0;
+  text-align: left;
+}
+
+.contact-page-header h1 {
+  font-size: 44px;
+  margin-bottom: 14px;
+}
+
+.contact-page-header .cs-subtitle {
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+
+.contact-columns {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 60px 100px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 70px;
+}
+
+.contact-photo-col {
+  position: relative;
+  flex: 1;
+  min-width: 260px;
+  max-width: 320px;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-photo-col img {
+  width: 100%;
+  border-radius: 24px;
+  -webkit-mask-image: linear-gradient(180deg, #000 75%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 75%, transparent 100%);
+}
+
+.contact-speech-bubble {
+  position: absolute;
+  top: 0;
+  right: -20px;
+  max-width: 220px;
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 20px 20px 20px 4px;
+  box-shadow: var(--glass-shadow);
+  padding: 18px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.contact-form-col {
+  flex: 1.3;
+  min-width: 300px;
+  max-width: 480px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contact-form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.contact-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.2px;
+}
+
+.contact-field input,
+.contact-field textarea {
+  font-family: var(--page-font);
+  font-size: 14px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  padding: 12px 14px;
+  resize: vertical;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  outline: 2px solid var(--wave-teal);
+  outline-offset: 1px;
+}
+
+.contact-form button {
+  align-self: flex-start;
+  margin-top: 6px;
+}
+
+.contact-page-alt {
+  text-align: left;
+  font-size: 14px;
+  color: var(--muted);
+  padding-bottom: 60px;
+}
+
+.contact-page-alt a {
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+.contact-email-highlight {
+  display: inline-block;
+  margin-top: 4px;
+  color: var(--wave-teal);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 800px) {
+  .contact-columns {
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 32px 60px;
+  }
+
+  .contact-form-col {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .contact-form-row {
+    flex-direction: column;
+  }
+}
+
+/* ==========================================================================
+   Wave divider
+   ========================================================================== */
+
+.footer-divider {
+  display: block;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+footer {
+  background: #ffffff;
+  padding: 34px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.footer-email {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.footer-nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.footer-nav a {
+  font-size: 14px;
+  color: var(--muted);
+  transition: opacity 0.2s ease;
+}
+
+.footer-nav a:hover {
+  opacity: 0.65;
+}
+
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.footer-socials a {
+  display: flex;
+  transition: opacity 0.2s ease;
+}
+
+.footer-socials a:hover {
+  opacity: 0.65;
+}
+
+.footer-socials img {
+  width: 34px;
+  height: 34px;
+}
+
+/* ==========================================================================
+   Case study pages (Prana, Wonder, Zero Control, B2B System)
+   ========================================================================== */
+
+.cs-hero {
+  padding: 60px 60px 20px;
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.cs-hero-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.cs-hero-text h1 {
+  font-size: 48px;
+  margin-bottom: 14px;
+}
+
+.cs-subtitle {
+  font-size: 17px;
+  color: var(--ink-soft);
+  margin-bottom: 34px;
+}
+
+.cs-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px 40px;
+  row-gap: 18px;
+  margin-bottom: 26px;
+}
+
+.cs-meta div h4 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--muted);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.cs-meta div p {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.cs-hero-image {
+  flex: 1;
+  min-width: 260px;
+  display: flex;
+  justify-content: center;
+}
+
+.cs-hero-image img {
+  width: 100%;
+  max-width: 420px;
+  filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.14));
+}
+
+/* Full-bleed hero variant — image flush against the left edge of the
+   viewport, text column on the right. No outer max-width/padding. */
+.cs-hero-fullbleed {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}
+
+.cs-hero-fullbleed-image {
+  width: 100%;
+  height: 60vh;
+  max-height: 420px;
+  display: block;
+}
+
+.cs-hero-fullbleed-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.cs-hero-fullbleed-text {
+  padding: 60px 60px 40px 50px;
+}
+
+.cs-hero-fullbleed-text h1 {
+  font-size: 48px;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 900px) {
+  .cs-hero-fullbleed {
+    grid-template-columns: 1fr;
+  }
+
+  .cs-hero-fullbleed-image {
+    height: 45vh;
+    max-height: 320px;
+  }
+
+  .cs-hero-fullbleed-text {
+    padding: 32px;
+  }
+}
+
+.cs-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 70px 60px;
+}
+
+.cs-section-title {
+  font-size: 34px;
+  margin-bottom: 26px;
+  text-align: left;
+}
+
+.cs-glass {
+  padding: 40px 0;
+}
+
+.cs-card {
+  padding: 20px 0;
+}
+
+.cs-card--framed {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
+  padding: 36px 40px;
+}
+
+.cs-text {
+  text-align: left;
+}
+
+.cs-text p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+
+.cs-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.cs-two-col img {
+  width: 100%;
+  border-radius: 14px;
+}
+
+.cs-image-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.cs-image-row img {
+  border-radius: 12px;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.cs-image-row--compact img {
+  max-width: 130px;
+  width: 130px;
+}
+
+.device-frame {
+  max-width: 320px;
+  border: 10px solid #1c1c1e;
+  border-radius: 26px;
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.13);
+}
+
+.cs-persona-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 18px;
+  padding: 30px 28px;
+  border-top: 4px solid var(--persona-accent, var(--wave-teal));
+}
+
+.cs-persona-card img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 14px;
+}
+
+.cs-persona-card h3 {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.cs-stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.cs-stat {
+  text-align: center;
+  min-width: 120px;
+}
+
+.cs-stat .num {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.cs-stat .label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.cs-persona-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.cs-quote-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.cs-quote {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  padding: 18px 22px;
+  font-size: 13.5px;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.cs-journey-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.cs-journey-step {
+  position: relative;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  padding: 26px 22px 22px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.cs-journey-step .step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.cs-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  padding: 10px 4px;
+  background: none;
+  border: none;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.cs-back-link:hover {
+  opacity: 0.65;
+}
+
+.cs-more-projects {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 40px 60px 100px;
+  text-align: left;
+}
+
+.cs-more-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.cs-more-grid a {
+  display: block;
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
+  padding: 14px;
+  overflow: hidden;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.cs-more-grid a:hover {
+  transform: translateY(-4px);
+  opacity: 0.88;
+}
+
+.cs-more-grid img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.cs-more-grid a:hover img {
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   About page
+   ========================================================================== */
+
+.about-title-row {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 70px 60px 10px;
+}
+
+.about-title-row h1 {
+  font-size: 46px;
+  margin-bottom: 20px;
+}
+
+/* Three invisible columns: icons | portrait | icons — no borders, no
+   background boxes on the columns themselves, just centered content. */
+.about-hero-columns {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 30px 60px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.about-col {
+  display: flex;
+  align-items: center;
+}
+
+.about-col-icons {
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
+
+.about-col-portrait {
+  flex-shrink: 0;
+  justify-content: center;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow);
+}
+
+.about-col-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.tool-icon {
+  width: 52px;
+  height: 52px;
+  padding: 8px;
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 14px;
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tool-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.about-story {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 60px 60px;
+}
+
+/* ==========================================================================
+   Lightbox Modal
+   ========================================================================== */
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  position: relative;
+  max-width: 45vw;
+  max-height: 42vh;
+  animation: slideUp 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.zoom-controls {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  gap: 12px;
+  z-index: 1003;
+}
+
+.zoom-controls.active {
+  display: flex;
+}
+
+.zoom-in-btn,
+.zoom-out-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  color: #2b2b2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.zoom-in-btn:hover:not(:disabled),
+.zoom-out-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.zoom-in-btn:disabled,
+.zoom-out-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.close-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #2b2b2e;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1002;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.project-img {
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.project-img:hover {
+  opacity: 0.9;
+}
+
+.about-story p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+}
+
+.about-experience {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 30px 60px 110px;
+  text-align: center;
+}
+
+.about-experience-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.about-experience-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
+  padding: 28px 26px;
+  text-align: left;
+}
+
+.about-experience-card h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.about-experience-card .years {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.about-experience-card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 6px;
+}
+
+.photo-caption {
+  font-size: 11.5px;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .navbar,
+  .hero,
+  .projects,
+  .who-am-i,
+  .contact,
+  footer {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .nav-links {
+    gap: 22px;
+  }
+
+  .project-row,
+  .project-row.reverse {
+    flex-direction: column;
+    margin-bottom: 90px;
+  }
+
+  .project-device,
+  .project-device.small {
+    width: 70%;
+    margin-bottom: -60px;
+  }
+
+  .project-card,
+  .project-row.reverse .project-card {
+    margin: 0;
+    width: 100%;
+  }
+
+  .hero-photo-wrap {
+    position: relative;
+    top: 0;
+    margin: 20px auto 0;
+  }
+
+  .hero-text {
+    margin-top: 20px;
+  }
+
+  .page-wash {
+    background-attachment: scroll, scroll;
+  }
+
+  .cs-hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 32px 20px;
+  }
+
+  .cs-meta {
+    justify-content: center;
+  }
+
+  .cs-section {
+    padding: 50px 32px;
+  }
+
+  .cs-two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .cs-glass,
+  .cs-card {
+    padding: 28px 26px;
+  }
+
+  .about-title-row {
+    text-align: center;
+    padding: 40px 32px 10px;
+  }
+
+  .about-hero-columns {
+    flex-direction: column;
+    padding: 20px 32px 40px;
+  }
+
+  .about-col-icons {
+    justify-content: center;
+  }
+
+  .about-experience-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .cs-image-row img,
+  .cs-two-col img,
+  .cs-hero-image img {
+    max-width: 100% !important;
+    width: 100%;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .nav-links {
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .projects h2 {
+    font-size: 38px;
+    margin-bottom: 60px;
+  }
+
+  .project-card {
+    padding: 30px 26px;
+  }
+
+  .who-am-i h2 {
+    font-size: 30px;
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cs-hero-text h1 {
+    font-size: 34px;
+  }
+
+  .cs-section-title {
+    font-size: 26px;
+  }
+
+  .cs-stat-row {
+    gap: 20px;
+  }
+}
